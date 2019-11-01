@@ -64,8 +64,8 @@ for out in outs:
         class_id = np.argmax(scores)
         confidence = scores[class_id]
         if confidence > 0.5:
-            center_x = int(detection[0] * Width)
-            center_y = int(detection[1] * Height)
+            center_x = int(detection[0] * imageWidth)
+            center_y = int(detection[1] * imageHeight)
             w = int(detection[2] * imageWidth)
             h = int(detection[3] * imageHeight)
             x = center_x - w / 2
