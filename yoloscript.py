@@ -2,6 +2,7 @@ import cv2
 import argparse
 import numpy as np
 # reference docs used: https://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html
+# https://docs.python.org/2/library/argparse.html
 # run this script by using the command: python yoloscript.py --image "yourimage".jpg --config "yourconfig".cfg --weights "yourweights".weights --classes "yourclasses".txt
 class_ids = []
 confidences = []
