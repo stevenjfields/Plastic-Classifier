@@ -66,8 +66,8 @@ for out in outs:
         if confidence > 0.5:
             center_x = int(detection[0] * Width)
             center_y = int(detection[1] * Height)
-            w = int(detection[2] * Width)
-            h = int(detection[3] * Height)
+            w = int(detection[2] * imageWidth)
+            h = int(detection[3] * imageHeight)
             x = center_x - w / 2
             y = center_y - h / 2
             class_ids.append(class_id)
