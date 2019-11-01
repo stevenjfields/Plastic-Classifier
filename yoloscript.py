@@ -56,7 +56,7 @@ def draw_bounding_box(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
 
 
 
-# for each detetion from each output layer 
+# for each detection 
 #get the confidence (confidence < 0.5), class id, bounding box params
 for out in outs:
     for detection in out:
