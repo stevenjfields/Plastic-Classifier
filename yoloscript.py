@@ -37,6 +37,8 @@ net = cv2.dnn.readNet(args.weights, args.config)
 
 # create input blob and set for the network
 blob = cv2.dnn.blobFromImage(image, imageScale, (416,416), (0,0,0), True, crop=False)
+#cv.dnn.blobFromImage(	image[, scalefactor[, size[, mean[, swapRB[, crop[, ddepth]]]]]]	)
+
 net.setInput(blob)
 
 #get the output layer names 
@@ -52,8 +54,9 @@ def draw_bounding_box(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
     label = str(classes[class_id])
     color = boxColor[class_id]
     cv2.rectangle(img, (x,y), (x_plus_w,y_plus_h), color, 2)
+    #cv2.rectangle(image, start_point, end_point, color, thickness)
     cv2.putText(img, label, (x-10,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-
+    #cv2.putText(image, text, org, font, fontScale, color[, thickness[, lineType[, bottomLeftOrigin]]])
 
 
 # for each detection 
