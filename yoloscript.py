@@ -62,6 +62,7 @@ def draw_bounding_box(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
     cv2.putText(img, label, (x-10,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
     #cv2.putText(image, text, org, font, fontScale, color[, thickness[, lineType[, bottomLeftOrigin]]])
 
+outs = net.forward(get_output_layers(net))
 
 # for each detection 
 #get the confidence (confidence < 0.5), class id, bounding box params
