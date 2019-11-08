@@ -10,7 +10,7 @@ class MainDisplay:
         self.master = master
         master.title("Plastic Classifier")
 
-        self.path = "imgs/test/Milk/milk6.jpg"
+        self.path = os.path.dirname(os.path.abspath(__file__)) + '/object-detection.jpg'
         img = Image.open(self.path)
         img = img.resize((1280,720))
         photo = ImageTk.PhotoImage(img)
