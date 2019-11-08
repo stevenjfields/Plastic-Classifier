@@ -18,8 +18,10 @@ class MainDisplay:
         self.image.image = photo
         self.image.pack(side="top")
         self.confidenceSlider = Scale(master, from_=0, to=1, orient=HORIZONTAL, tickinterval=0.1, resolution=0.01, length=580, label='Confidence')
+        self.confidenceSlider.set(0.5)
         self.confidenceSlider.pack(side='left')
         self.nonMaximaSlider = Scale(master, from_=0, to=1, orient=HORIZONTAL, tickinterval=0.1, resolution=0.01, length=580, label='NMS')
+        self.nonMaximaSlider.set(0.3)
         self.nonMaximaSlider.pack(side='right')
         self.changePic = Button(master, text="Change Picture", command=self.changePhoto)
         self.changePic.pack(side="top", pady=5, fill=X, padx=5)
