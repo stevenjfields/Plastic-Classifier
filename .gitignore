@@ -2,3 +2,4 @@ Env/
 Images/
 .vscode/
 *.weights
+__pycache__/

@@ -6,7 +6,7 @@ import numpy as np
 class plasticClassifier:
 
     config = 'resources/yolov3-obj.cfg'
-    weights = 'resources/yolov3-obj_last.weights'
+    weights = 'resources/yolov3-obj_final.weights'
     object_classes = 'resources/obj.names'
 
     conf_threshold = 0.5
@@ -33,9 +33,11 @@ class plasticClassifier:
     # function to draw bounding box on the detected object with class name
     def draw_bounding_box(self, img, class_id, confidence, x, y, x_plus_w, y_plus_h):
         label = str(self.classes[class_id])
+        confidence_percentage = confidence * 100
+        label += ' {0:.1f}%'.format(confidence_percentage)
         color = self.COLORS[class_id]
         cv2.rectangle(img, (x,y), (x_plus_w,y_plus_h), color, 3)
-        cv2.putText(img, label, (x-10,y-10), cv2.FONT_HERSHEY_TRIPLEX, 1, color, 1)
+        cv2.putText(img, label, (x-10,y-10), cv2.FONT_HERSHEY_TRIPLEX, 1.2, color, 2)
 
     def label_image(self):
         # read input image
