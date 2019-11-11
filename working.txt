@@ -1,12 +1,8 @@
-Accessor methods for plasticClassifier class. 
-    -> E.g. path, confidence, nms, resource files.
-
 Look into dynamic resizing for GUI
 Change resource files in GUI
 
 For testing/presenting:
  - Add folder with images to test the program with.
 
- For yoloscripts.py:
+ For plasticClassifier.py:
   - Add support for labeling an entire folder at once
-  - Add time it takes to label as an output (e.g. Executed in 500ms)

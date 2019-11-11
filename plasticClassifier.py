@@ -2,6 +2,7 @@
 import cv2
 import argparse
 import numpy as np
+import time
 
 class plasticClassifier:
 
@@ -29,7 +30,7 @@ class plasticClassifier:
         self.path = path
 
     def set_config(self, config_path):
-        self.config = self.config_path
+        self.config = config_path
 
     def set_weights(self, weights_path):
         self.weights = weights_path
@@ -52,6 +53,10 @@ class plasticClassifier:
         cv2.putText(img, label, (x-10,y-10), cv2.FONT_HERSHEY_TRIPLEX, 1.2, color, 2)
 
     def label_image(self):
+
+        # Keeps track of execution time.
+        start_time = time.time()
+
         # read input image
         image = cv2.imread(self.path)
 
@@ -114,3 +119,38 @@ class plasticClassifier:
             self.draw_bounding_box(image, class_ids[i], confidences[i], round(x), round(y), round(x+w), round(y+h))   
         # save output image to disk
         cv2.imwrite("object-detection.jpg", image)
+
+        print('Executed in %s seconds.' % (time.time() - start_time))
+
+if __name__ == "__main__":
+    conf = 0.5
+    nms = 0.3
+    ap = argparse.ArgumentParser(
+        description='''Detects objects in an image using a pre-trained Yolov3 model'''
+    )
+    ap.add_argument('-i', '--image', required=False, help = 'Path to image file.') #path to input image
+    ap.add_argument('-cf', '--confidence', required=False, help = 'Custom Confidence level. Default: 0.5')
+    ap.add_argument('-n', '--nms', required=False, help = 'Custom Non-Maximum Supression level. Default: 0.3')
+    ap.add_argument('-c', '--config', required=False, help = 'Path to cfg file. Default: resources/yolov3-obj.cfg') # path to cfg
+    ap.add_argument('-w', '--weights', required=False, help = 'Path to weights file. Default: resources/yolov3-obj_final.weights') #path to .weights
+    ap.add_argument('-cl', '--classes', required=False, help = 'Path to class names file. Default: resources/obj.names') #path to .txt with class names
+    args = ap.parse_args()
+
+    if args.confidence is not None:
+        conf = args.confidence
+
+    if args.nms is not None:
+        nms = args.nms
+
+    classifier = plasticClassifier(conf, nms, args.image)
+
+    if args.config is not None:
+        classifier.set_config(args.config)
+    
+    if args.weights is not None:
+        classifier.set_weights(args.weights)
+    
+    if args.classes is not None:
+        classifier.set_classes(args.classes)
+    
+    classifier.label_image()
