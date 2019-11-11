@@ -25,6 +25,18 @@ class plasticClassifier:
 
         self.COLORS = np.random.uniform(0, 255, size=(len(self.classes), 3))
         
+    def set_path(self, path):
+        self.path = path
+
+    def set_config(self, config_path):
+        self.config = self.config_path
+
+    def set_weights(self, weights_path):
+        self.weights = weights_path
+
+    def set_classes(self, classes_path):
+        self.object_classes = classes_path
+
     def get_output_layers(self, net):
         layer_names = net.getLayerNames()
         output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
