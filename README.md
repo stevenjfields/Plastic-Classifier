@@ -24,7 +24,7 @@ C:\Path\To\Env\Scripts\activate
 
 ### Add necessary files
 
-Add the necessary files into the resources folder. The .cfg and .names files are included, But the .weights file will need to be [downloaded](https://drive.google.com/open?id=1pni5GZYqZh5vLJhQMBVWT5-keNihD0ye). This link is currently the older weights.
+Add the necessary files into the resources folder. The .cfg and .names files are included, But the .weights file will need to be [downloaded](https://drive.google.com/open?id=1wjsJfALPRW9w1FvDqGvXg4aZbWUEO7ef).
 
 ## Running
 To run this program first activate the virtual environment and then run the Plastic_Classifier_GUI.py file.
