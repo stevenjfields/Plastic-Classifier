@@ -1,0 +1,36 @@
+metal_can 99.8%
+Center X: 536
+Center Y: 201
+Width: 225
+Height: 267
+
+metal_can 99.8%
+Center X: 793
+Center Y: 893
+Width: 224
+Height: 330
+
+milk 99.6%
+Center X: 245
+Center Y: 279
+Width: 459
+Height: 491
+
+metal_can 98.5%
+Center X: 969
+Center Y: 535
+Width: 263
+Height: 251
+
+water_bottles 97.8%
+Center X: 1696
+Center Y: 224
+Width: 446
+Height: 458
+
+water_bottles 75.4%
+Center X: 1381
+Center Y: 71
+Width: 362
+Height: 137
+
