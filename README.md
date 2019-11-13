@@ -1,4 +1,4 @@
-# The_Dump
+# Plastic Classifier
 Plastic Classification using image processing through OpenCV's CDN module 
 
 ## Setup
