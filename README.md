@@ -33,3 +33,22 @@ To run this program first activate the virtual environment and then run the Plas
 C:\Path\To\Env\Scripts\activate
 (Env) python Plastic_Classifier_GUI.py
 ```
+
+## Utilizing BoundingBoxes.txt
+
+The output file gives a label and 4 values, Center X, Center Y, Width, and Height. To find the bounding boxes using these values, do as follows :
+
+1. Subtract Width/2 from X and Height/2 from Y to get the bottom left corner of the box.
+2. Add Width to X and Height to Y to get the top right corner of the box.
+
+From plasticClassifier.py:
+
+```python
+#Lines 109 and 110. Values are later rounded in lines 52 and 53.
+x = center_x - w / 2
+y = center_y - h / 2
+
+#Lines 54 and 55
+x_plus_w = round(x+w)
+y_plus_h = round(y+h)
+```

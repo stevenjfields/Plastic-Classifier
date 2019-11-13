@@ -9,7 +9,7 @@ class plasticClassifier:
     config = 'resources/yolov3-obj.cfg'
     weights = 'resources/yolov3-obj_final.weights'
     object_classes = 'resources/obj.names'
-
+    file_object = open("BoundingBoxes.txt", "w")
     conf_threshold = 0.5
     nms_threshold = 0.3
     path = ''
@@ -44,13 +44,22 @@ class plasticClassifier:
         return output_layers
 
     # function to draw bounding box on the detected object with class name
-    def draw_bounding_box(self, img, class_id, confidence, x, y, x_plus_w, y_plus_h):
+    def output_bounding_box(self, img, class_id, confidence, x, y, w, h):
         label = str(self.classes[class_id])
         confidence_percentage = confidence * 100
         label += ' {0:.1f}%'.format(confidence_percentage)
         color = self.COLORS[class_id]
-        cv2.rectangle(img, (x,y), (x_plus_w,y_plus_h), color, 3)
-        cv2.putText(img, label, (x-10,y-10), cv2.FONT_HERSHEY_TRIPLEX, 1.2, color, 2)
+        round_x = round(x)
+        round_y = round(y)
+        x_plus_w = round(x+w)
+        y_plus_h = round(y+h)
+        center_x = round(x + w/2)
+        center_y = round(y + h/2)
+        cv2.rectangle(img, (round_x,round_y), (x_plus_w,y_plus_h), color, 3)
+        cv2.putText(img, label, (round_x-10,round_y-10), cv2.FONT_HERSHEY_TRIPLEX, 1.2, color, 2)
+        self.file_object.write(label + "\n")
+        self.file_object.write('Center X: %s\nCenter Y: %s\n' % (center_x, center_y))
+        self.file_object.write('Width: %s\nHeight: %s\n\n' % (round(w), round(h)))
 
     def label_image(self):
 
@@ -92,7 +101,7 @@ class plasticClassifier:
                 scores = detection[5:]
                 class_id = np.argmax(scores)
                 confidence = scores[class_id]
-                if confidence > 0.5:
+                if confidence > self.conf_threshold:
                     center_x = int(detection[0] * Width)
                     center_y = int(detection[1] * Height)
                     w = int(detection[2] * Width)
@@ -106,7 +115,8 @@ class plasticClassifier:
         # apply non-max suppression
         indices = cv2.dnn.NMSBoxes(boxes, confidences, self.conf_threshold, self.nms_threshold)
 
-        # go through the detections remaining
+
+        # go through the remaining detections
         # after nms and draw bounding box
         for i in indices:
             i = i[0]
@@ -116,7 +126,7 @@ class plasticClassifier:
             w = box[2]
             h = box[3]
             
-            self.draw_bounding_box(image, class_ids[i], confidences[i], round(x), round(y), round(x+w), round(y+h))   
+            self.output_bounding_box(image, class_ids[i], confidences[i], x, y, w, h)   
         # save output image to disk
         cv2.imwrite("object-detection.jpg", image)
 
