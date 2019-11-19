@@ -1,5 +1,5 @@
 # Plastic Classifier
-Plastic Classification using image processing through OpenCV's CDN module 
+Plastic Classification using image processing through OpenCV's DNN module utilizing a Yolov3 model.
 
 ## Setup
 
